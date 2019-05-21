@@ -1,0 +1,6 @@
+"{
+    \"properties\":{\"delivery_mode\":2},
+    \"routing_key\":\"QueueName\",
+    \"payload\":\"HI\",
+    \"payload_encoding\":\"string\"
+    }"

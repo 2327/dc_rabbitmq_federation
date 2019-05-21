@@ -35,3 +35,13 @@ Federation Upstreams Setup.
     For “Policy” enter federation-upstream: [upstream name from setup above] “Policy”.
     Click Add policy.
 
+
+**Load setting on boot**
+
+
+**Test configuration**
+```
+curl -u guest:guest -H "content-type:application/json" \
+    -X POST -d'{"properties":{"delivery_mode":2},"routing_key":"QueueName","payload":"HI","payload_encoding":"string"}' \
+    http://localhost:MGMT_PORT/api/exchanges/%2f/amq.default/publish
+```
