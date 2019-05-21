@@ -1,0 +1,48 @@
+version: '3'
+services:
+  queue-1:
+    build:
+      context: ./.docker
+      dockerfile: rabbitmq.Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE}
+    container_name: federation-1
+    environment:
+      TIMEZONE: ${TIMEZONE}
+      RABBITMQ_DEFAULT_USER: ${QUEUE_USER}
+      RABBITMQ_DEFAULT_PASS: ${QUEUE_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${QUEUE_VHOST}
+    ports:
+      - 15690:15672
+  queue-2:
+    build:
+      context: ./.docker
+      dockerfile: rabbitmq.Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE}
+    container_name: federation-2
+    environment:
+      TIMEZONE: ${TIMEZONE}
+      RABBITMQ_DEFAULT_USER: ${QUEUE_USER}
+      RABBITMQ_DEFAULT_PASS: ${QUEUE_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${QUEUE_VHOST}
+    ports:
+      - 15691:15672
+  queue-3:
+    build:
+      context: ./.docker
+      dockerfile: rabbitmq.Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE}
+    container_name: federation-3
+    environment:
+      TIMEZONE: ${TIMEZONE}
+      RABBITMQ_DEFAULT_USER: ${QUEUE_USER}
+      RABBITMQ_DEFAULT_PASS: ${QUEUE_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${QUEUE_VHOST}
+    ports:
+      - 15692:15672
+networks:
+  rmq:
+    external:
+      name: ${NETWORK_NAME}
