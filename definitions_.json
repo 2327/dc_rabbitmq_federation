@@ -1,0 +1,17 @@
+{
+"rabbit_version":"3.6.16",
+"users":[{"name":"rmq","password_hash":"NCOsYeXKGhigJ7DnzrEWseR9Bt8O8rH47EnxUyrANO51HaUN","hashing_algorithm":"rabbit_password_hashing_sha256","tags":"administrator"}],
+"vhosts":[{"name":"eventservice"},{"name":"rmq"}],
+
+"permissions":[{"user":"rmq","vhost":"test","configure":".*","write":".*","read":".*"},{"user":"rmq","vhost":"rmq","configure":".*","write":".*","read":".*"}],
+
+"parameters":[{"value":{"uri":"amqp://rmq:rmqpass@federation-1/test1","ack-mode":"on-confirm","trust-user-id":false,"exchange":"federated.nf_from.event-service","max-hops":1},"vhost":"eventservice","component":"federation-upstream","name":"federated.nf_from"}],
+
+"global_parameters":[{"name":"cluster_name","value":"rabbit@d89fd1c6ee51"}],
+
+"policies":[{"vhost":"eventservice","name":"federated.nf_from polycy","pattern":"^federated\\.","apply-to":"exchanges","definition":{"federation-upstream-set":"all"},"priority":0}],
+
+"queues":[{"name":"queue","vhost":"eventservice","durable":true,"auto_delete":false,"arguments":{}}],
+"exchanges":[{"name":"federated.nf_from","vhost":"eventservice","type":"topic","durable":true,"auto_delete":false,"internal":false,"arguments":{}}],
+
+"bindings":[{"source":"federated.nf_from","vhost":"eventservice","destination":"queue","destination_type":"queue","routing_key":"nf.material.#","arguments":{}}]}
